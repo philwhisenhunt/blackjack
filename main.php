@@ -1,5 +1,6 @@
 <?php
 require 'showHand.php';
+require "calculateHandValue.php";
 $dealerHandValue = 0;
 $playerHandValue = 0;
 $playersCards = [];
@@ -19,13 +20,22 @@ while ($dealerHandValue < 17) {
         
         $playersCards[] = array_pop($cards);
         showHand($playersCards);
+
+        echo "The value of your hand is ";
+
+        echo calculateHandValue($playersCards);
+
+        echo "\n \n";
+
         //deal another card
         
     }
 
     if ($line === "s"){
-        echo "The value of your hand is ";
-        echo $playerHandValue;
+        echo "Stand. The value of your hand is ";
+
+        calculateHandValue($playersCards);
+        //echo $playerHandValue;
     }
 
 
