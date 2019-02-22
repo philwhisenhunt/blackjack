@@ -5,11 +5,16 @@ $playerHandValue = 0;
 
 while ($dealerHandValue < 17) {
     //echo "Bet or stay?";
-    $line = readline("Bet or stay \n");
+    $line = readline("Type b to bet or s for stand \n");
 
-    if ($line === "bet"){
-        echo "game over. \n";
-        exit();
+    if ($line === "b"){
+        
+        $line = readline("Type b to bet or s for stand \n");
+        
+    }
+
+    if ($line === "s"){
+        echo "The value of your hand is ";
     }
 
 
