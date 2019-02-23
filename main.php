@@ -38,6 +38,11 @@ while ($dealerHandValue < 17) {
         //echo $playerHandValue;
     }
 
+    //dealer gets a card
+
+    $dealersCards[] = array_pop($cards);
+    $dealerHandValue = calculateHandValue($dealersCards);
+
 
 
 
