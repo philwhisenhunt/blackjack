@@ -42,6 +42,7 @@ while ($dealerHandValue < 17) {
 
     $dealersCards[] = array_pop($cards);
     $dealerHandValue = calculateHandValue($dealersCards);
+    echo "Dealer Hand value is " . $dealerHandValue . "\n";
 
 
 

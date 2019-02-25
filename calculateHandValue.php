@@ -9,8 +9,9 @@ function calculateHandValue($playerHand){
         $splitHand = str_split($playerHand[$i]);
 
     $cardValueArray[] = cardValueMaker($splitHand);
-    echo "The cardValueArray is ";
-    print_r($cardValueArray);
+    //echo "The cardValueArray is ";
+    //print_r($cardValueArray);
+    
 
     //echo "The cardValueArray is ";
     //print_r($cardValueArray);
