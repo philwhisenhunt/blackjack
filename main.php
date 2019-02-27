@@ -6,6 +6,7 @@ $playerHandValue = 0;
 $playersCards = [];
 $dealersCards = [];
 $playerHandStatus = true;
+$dealerHandStatus = true;
 
 //$cards = ['AH','JC', 'KH', '9C', 'JH' ];
 //blank cards $cards = ['A','K','Q','J','T', '9', '8', '7', '6', '5', '4', '3', '2'];
@@ -20,7 +21,8 @@ $playersCards[] = array_pop($cards);
 $playersCards[] = array_pop($cards);
 showHand($playersCards);
 
-while ($dealerHandValue < 17 && $playerHandValue <22) {
+//while ($dealerHandValue < 17 && $playerHandValue <22) {
+while ($dealerHandStatus && $playerHandStatus) {
     //echo "Bet or stay?";
     $line = readline("Type h to hit or s for stand \n");
 
@@ -31,9 +33,17 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
 
         echo "The value of your hand is ";
 
-        echo calculateHandValue($playersCards);
+        $playerHandValue = calculateHandValue($playersCards);
+
+        echo $playerHandValue;
 
         echo "\n \n";
+
+        if($playerHandValue > 21){
+            $playerHandStatus = false;
+            echo "you busted, you lose.";
+            exit();
+        }
 
         //dealer gets a card
         $dealersCards[] = array_pop($cards);
@@ -61,6 +71,8 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
     if ($dealerHandValue > 21){
         $dealerHandStatus = false;
     }
+
+
 
 
 
