@@ -19,7 +19,7 @@ $playersCards[] = array_pop($cards);
 $playersCards[] = array_pop($cards);
 showHand($playersCards);
 
-while ($dealerHandValue < 17) {
+while ($dealerHandValue < 17 && $playerHandValue <22) {
     //echo "Bet or stay?";
     $line = readline("Type h to hit or s for stand \n");
 
@@ -35,6 +35,10 @@ while ($dealerHandValue < 17) {
         echo "\n \n";
 
         //deal another card
+
+        //dealer gets a card
+        $dealersCards[] = array_pop($cards);
+
         
     }
 
@@ -42,7 +46,16 @@ while ($dealerHandValue < 17) {
         echo "Stand. The value of your hand is ";
 
         calculateHandValue($playersCards);
+
+        // echo "The dealer's hand value is ";
+
+        // calculateHandValue($dealersCards);
+
         //echo $playerHandValue;
+
+        //dealer gets a card
+        //$dealersCards[] = array_pop($cards);
+
     }
 
     //dealer gets a card
