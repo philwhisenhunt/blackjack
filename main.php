@@ -34,8 +34,6 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
 
         echo "\n \n";
 
-        //deal another card
-
         //dealer gets a card
         $dealersCards[] = array_pop($cards);
 
@@ -47,18 +45,9 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
 
         calculateHandValue($playersCards);
 
-        // echo "The dealer's hand value is ";
-
-        // calculateHandValue($dealersCards);
-
-        //echo $playerHandValue;
-
-        //dealer gets a card
-        //$dealersCards[] = array_pop($cards);
-
+     
     }
 
-    //dealer gets a card
 
     $dealersCards[] = array_pop($cards);
     $dealerHandValue = calculateHandValue($dealersCards);
@@ -85,6 +74,6 @@ if($dealerHandValue < 22 && $dealerHandValue > 16){
 }
 
 if($dealerHandValue > 22){
-    echo "Dealer busts with a value of $dealerHandValue";
-    echo " \n \n ";
+    echo "Dealer busts with a value of $dealerHandValue \n";
+  
 }
