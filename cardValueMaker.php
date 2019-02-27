@@ -20,8 +20,40 @@ function cardValueMaker($pieceOfCard){
         return $value = 11;
     }
 
+    if($pieceOfCard == "T"){
+        return $value = 10;
+    }
+
     if($pieceOfCard == "9"){
         return $value = 9;
+    }
+
+    if($pieceOfCard == "8"){
+        return $value = 8;
+    }
+
+    if($pieceOfCard == "7"){
+        return $value = 7;
+    }
+
+    if($pieceOfCard == "6"){
+        return $value = 6;
+    }
+
+    if($pieceOfCard == "5"){
+        return $value = 5;
+    }
+
+    if($pieceOfCard == "4"){
+        return $value = 4;
+    }
+
+    if($pieceOfCard == "3"){
+        return $value = 3;
+    }
+
+    if($pieceOfCard == "2"){
+        return $value = 2;
     }
 }
    
