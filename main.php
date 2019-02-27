@@ -5,6 +5,7 @@ $dealerHandValue = 0;
 $playerHandValue = 0;
 $playersCards = [];
 $dealersCards = [];
+$playerHandStatus = true;
 
 //$cards = ['AH','JC', 'KH', '9C', 'JH' ];
 //blank cards $cards = ['A','K','Q','J','T', '9', '8', '7', '6', '5', '4', '3', '2'];
@@ -48,6 +49,7 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
 
         //set player status to false?
 
+     $playerHandStatus = false;
      
     }
 
@@ -56,7 +58,11 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
     $dealerHandValue = calculateHandValue($dealersCards);
     echo "Dealer Hand value is " . $dealerHandValue . "\n";
 
-    
+    if ($dealerHandValue > 21){
+        $dealerHandStatus = false;
+    }
+
+
 
 
 
