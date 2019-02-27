@@ -68,3 +68,23 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
 
 
 }
+
+$dealerHandValue = calculateHandValue($dealersCards);
+
+if($dealerHandValue < 22 && $dealerHandValue > 16){
+    if($dealerHandValue == 21){
+        echo "Dealer wins";
+    }
+
+    else{
+        echo "dealer stands with a value of ";
+        calculateHandValue($dealersCards);
+    }
+
+    
+}
+
+if($dealerHandValue > 22){
+    echo "Dealer busts with a value of $dealerHandValue";
+    echo " \n \n ";
+}
