@@ -43,7 +43,10 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
     if ($line === "s"){
         echo "Stand. The value of your hand is ";
 
-        calculateHandValue($playersCards);
+        echo calculateHandValue($playersCards);
+        echo "\n \n";
+
+        //set player status to false?
 
      
     }
@@ -52,6 +55,8 @@ while ($dealerHandValue < 17 && $playerHandValue <22) {
     $dealersCards[] = array_pop($cards);
     $dealerHandValue = calculateHandValue($dealersCards);
     echo "Dealer Hand value is " . $dealerHandValue . "\n";
+
+    
 
 
 
