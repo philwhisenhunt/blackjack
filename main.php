@@ -6,7 +6,7 @@ $playerHandValue = 0;
 $playersCards = [];
 $dealersCards = [];
 
-$cards = ['AH','JC', 'KH', '2C', 'JH' ];
+$cards = ['AH','JC', 'KH', '9C', 'JH' ];
 
 $playersCards[] = array_pop($cards);
 $playersCards[] = array_pop($cards);
