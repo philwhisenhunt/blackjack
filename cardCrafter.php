@@ -1,13 +1,27 @@
 <?php
-echo "hello \n";
-
-
+echo "Dealing... \n";
+$numberOfCards = 3;
+//for the number of cards, add this => ," ","-","-","-","-","-"
+//but to add each one, I may need to copy each element one by one. Pop it over?
 
 $cardName = "8C";
-$topLineRow = [" ","-","-","-","-","-", " ","-","-","-","-","-"];
+// $topLineRow = [" ","-","-","-","-","-", " ","-","-","-","-","-"];
+$topLineRow = [" ","-","-","-","-","-"];
+
 $cardNameRow = ["|",$cardName," "," "," ", "|", "|",$cardName," "," "," ", "|"];
 $spaceAndBars = ["|"," "," "," "," ", " |", "|"," "," "," "," ", " |"];
 $bottomLineRow = [" ","-","-","-","-", " ","-","-","-","-"];
+
+$megaRow = [];
+for($i=0; $i < $numberOfCards; $i++){
+    for($j=0; $j<count($topLineRow); $j++)
+    $megaRow[] = $topLineRow[$j];
+    // echo "Round \n";
+}
+
+// print_r($megaRow);
+// die();
+
 
 //Reserve this
 // $cardName = "8C";
@@ -17,7 +31,8 @@ $bottomLineRow = [" ","-","-","-","-", " ","-","-","-","-"];
 // $bottomLineRow = [" ","-","-","-","-"];
 
 $mergeArray = [];
-$mergeArray[] = $topLineRow;
+// $mergeArray[] = $topLineRow;
+$mergeArray[] = $megaRow;
 $mergeArray[] = $cardNameRow;
 $mergeArray[] = $spaceAndBars;
 $mergeArray[] = $spaceAndBars;
