@@ -17,14 +17,26 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
  'AC','KC','QC','JC','TC', '9C', '8C', '7C', '6C', '5C', '4C', '3C', '2C'];
 
 shuffle($cards);
-print_r($cards);
-die();
+echo "Shuffling cards ... \n";
+// print_r($cards);
+// die();
 
 $playersCards[] = array_pop($cards);
 $playersCards[] = array_pop($cards);
 showHand($playersCards);
 
 //while ($dealerHandValue < 17 && $playerHandValue <22) {
+
+$playerHandValue = calculateHandValue($playersCards);
+$dealerHandValue = calculateHandValue($dealersCards);
+
+if($playerHandValue == 21 &&)
+if($playerHandValue == 21){
+    echo "Blackjack!";
+    die();
+}
+
+
 while ($dealerHandStatus && $playerHandStatus) {
     //echo "Bet or stay?";
     $line = readline("Type h to hit or s for stand \n");
