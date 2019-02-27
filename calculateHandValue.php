@@ -5,6 +5,8 @@ require 'cardValueMaker.php';
 function calculateHandValue($playerHand){
 
     $cardValueArray= [];
+
+    //loop through every card
     for($i=0; $i<count($playerHand); $i++){
         $splitHand = str_split($playerHand[$i]);
 

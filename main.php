@@ -14,9 +14,9 @@ showHand($playersCards);
 
 while ($dealerHandValue < 17) {
     //echo "Bet or stay?";
-    $line = readline("Type b to bet or s for stand \n");
+    $line = readline("Type h to hit or s for stand \n");
 
-    if ($line === "b"){
+    if ($line === "h"){
         
         $playersCards[] = array_pop($cards);
         showHand($playersCards);
