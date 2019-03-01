@@ -8,6 +8,8 @@ $playersCards = [];
 $dealersCards = [];
 $playerHandStatus = true;
 $dealerHandStatus = true;
+$bankAccount = 500;
+$betAmount = 50;
 
 //$cards = ['AH','JC', 'KH', '9C', 'JH' ];
 //blank cards $cards = ['A','K','Q','J','T', '9', '8', '7', '6', '5', '4', '3', '2'];
@@ -89,7 +91,7 @@ while ($dealerHandStatus || $playerHandStatus) {
         echo "Stand. The value of your hand is ";
 
         echo calculateHandValue($playersCards);
-        echo "\n \n";
+        echo "\n";
 
         //set player status to false?
 
@@ -104,6 +106,7 @@ while ($dealerHandStatus || $playerHandStatus) {
 
     if ($dealerHandValue > 21){
         $dealerHandStatus = false;
+        $playerHandStatus = false;
     }
 
     if($dealerHandValue >17 ){
@@ -123,6 +126,7 @@ $dealerHandValue = calculateHandValue($dealersCards);
 if($dealerHandValue < 22 && $dealerHandValue > 16){
     if($dealerHandValue == 21){
         echo "Dealer wins \n";
+        $bankAccount -= $betAmount;
     }
 
     else{
@@ -136,6 +140,11 @@ if($dealerHandValue < 22 && $dealerHandValue > 16){
 
 if($dealerHandValue > 22){
     echo "Dealer busts with a value of $dealerHandValue \n";
-  
+    $bankAccount += $betAmount;
+    echo "Your current bank account is now at " . $bankAccount;
+    echo "You win!";
 }
 
+if($dealerHandValue < $playerHandValue){
+    
+}
