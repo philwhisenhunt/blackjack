@@ -51,13 +51,16 @@ showDealerHalfHand($dealersCards);
 
 
 
-while ($dealerHandStatus && $playerHandStatus) {
+while ($dealerHandStatus || $playerHandStatus) {
     //echo "Bet or stay?";
     $line = readline("Type h to hit or s for stand \n");
 
     if ($line === "h"){
         
+        if($playerHandStatus){
+
         $playersCards[] = array_pop($cards);
+        }
         showHand($playersCards);
 
         echo "The value of your hand is ";
@@ -75,7 +78,9 @@ while ($dealerHandStatus && $playerHandStatus) {
         }
 
         //dealer gets a card
-        $dealersCards[] = array_pop($cards);
+        if($dealerHandStatus){
+            $dealersCards[] = array_pop($cards);
+        }
 
         
     }
@@ -101,6 +106,9 @@ while ($dealerHandStatus && $playerHandStatus) {
         $dealerHandStatus = false;
     }
 
+    if($dealerHandValue >17 ){
+        $dealerHandStatus = false;
+    }
 
 
 
@@ -119,7 +127,8 @@ if($dealerHandValue < 22 && $dealerHandValue > 16){
 
     else{
         echo "dealer stands with a value of ";
-        calculateHandValue($dealersCards);
+        echo calculateHandValue($dealersCards);
+        echo "\n";
     }
 
     
@@ -129,3 +138,4 @@ if($dealerHandValue > 22){
     echo "Dealer busts with a value of $dealerHandValue \n";
   
 }
+
