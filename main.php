@@ -1,6 +1,7 @@
 <?php
 require 'showHand.php';
 require "calculateHandValue.php";
+require 'showDealerHalfHand.php';
 $dealerHandValue = 0;
 $playerHandValue = 0;
 $playersCards = [];
@@ -46,7 +47,7 @@ echo "The value of your hand is $playerHandValue \n";
 //display the dealer's cards
 //how to hide the top card?
 echo "The dealer has: ";
-showHand($dealersCards);
+showDealerHalfHand($dealersCards);
 
 
 
@@ -113,7 +114,7 @@ $dealerHandValue = calculateHandValue($dealersCards);
 
 if($dealerHandValue < 22 && $dealerHandValue > 16){
     if($dealerHandValue == 21){
-        echo "Dealer wins";
+        echo "Dealer wins \n";
     }
 
     else{

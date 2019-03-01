@@ -6,3 +6,5 @@ function showHand($blackjackHand){
     }
     echo "\n";
 }
+
+//if isDealer, then don't print the first card. 
