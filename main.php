@@ -37,11 +37,11 @@ $dealerHandValue = calculateHandValue($dealersCards);
 
 if($playerHandValue == 21 && $dealerHandValue == 21){
     echo "It was a tie";
-    die();
+    //die();
 }
 if($playerHandValue == 21){
     echo "Blackjack!";
-    die();
+    //die();
 }
 
 echo "The value of your hand is $playerHandValue \n";
@@ -56,6 +56,28 @@ showDealerHalfHand($dealersCards);
 // while ($dealerHandStatus || $playerHandStatus) {
 while (true) {
     //echo "Bet or stay?";
+
+    //Figure out how to shuffle cards after out
+    //add betting info for tie and blackjack
+
+    $playerHandValue = calculateHandValue($playersCards);
+    $dealerHandValue = calculateHandValue($dealersCards);
+
+    if($playerHandValue == 21 && $dealerHandValue == 21){
+        echo "It was a tie";
+        //die();
+    }
+    if($playerHandValue == 21){
+        echo "Blackjack!";
+        //die();
+    }
+
+    echo "The value of your hand is $playerHandValue \n";
+
+    //display the dealer's cards
+    //how to hide the top card?
+    echo "The dealer has: ";
+    showDealerHalfHand($dealersCards);
 
     
     $line = readline("Type h to hit or s for stand \n");
