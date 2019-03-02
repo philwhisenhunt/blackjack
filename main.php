@@ -53,7 +53,8 @@ showDealerHalfHand($dealersCards);
 
 
 
-while ($dealerHandStatus || $playerHandStatus) {
+// while ($dealerHandStatus || $playerHandStatus) {
+while (true) {
     //echo "Bet or stay?";
 
     
@@ -120,36 +121,36 @@ while ($dealerHandStatus || $playerHandStatus) {
 
 
 
+    $dealerHandValue = calculateHandValue($dealersCards);
 
-
-
-
-}
-
-$dealerHandValue = calculateHandValue($dealersCards);
-
-if($dealerHandValue < 22 && $dealerHandValue > 16){
-    if($dealerHandValue == 21){
-        echo "Dealer wins \n";
-        $bankAccount -= $betAmount;
+    if($dealerHandValue < 22 && $dealerHandValue > 16){
+        if($dealerHandValue == 21){
+            echo "Dealer wins \n";
+            $bankAccount -= $betAmount;
+        }
+    
+        else{
+            echo "dealer stands with a value of ";
+            echo calculateHandValue($dealersCards);
+            echo "\n";
+        }
+    
+        
+    }
+    
+    if($dealerHandValue > 22){
+        echo "Dealer busts with a value of $dealerHandValue \n";
+        $bankAccount += $betAmount;
+        echo "Your current bank account is now at " . $bankAccount . "\n";
+        echo "You win! \n";
+    }
+    
+    if($dealerHandValue < $playerHandValue){
+        
     }
 
-    else{
-        echo "dealer stands with a value of ";
-        echo calculateHandValue($dealersCards);
-        echo "\n";
-    }
 
-    
+//while statement should be for while money still in account. Or just any true statement. 
 }
 
-if($dealerHandValue > 22){
-    echo "Dealer busts with a value of $dealerHandValue \n";
-    $bankAccount += $betAmount;
-    echo "Your current bank account is now at " . $bankAccount . "\n";
-    echo "You win! \n";
-}
 
-if($dealerHandValue < $playerHandValue){
-    
-}
