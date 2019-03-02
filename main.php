@@ -65,7 +65,7 @@ while ($dealerHandStatus || $playerHandStatus) {
         }
         showHand($playersCards);
 
-        echo "The value of your hand is ";
+        echo "\nThe value of your hand is ";
 
         $playerHandValue = calculateHandValue($playersCards);
 
@@ -75,7 +75,7 @@ while ($dealerHandStatus || $playerHandStatus) {
 
         if($playerHandValue > 21){
             $playerHandStatus = false;
-            echo "you busted, you lose.";
+            echo "You busted, you lose.";
             exit();
         }
 
