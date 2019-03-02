@@ -57,6 +57,7 @@ showDealerHalfHand($dealersCards);
 
 
 // while ($dealerHandStatus || $playerHandStatus) {
+    //change to while bank account greater than -500?
 while (true) {
     //echo "Bet or stay?";
 
