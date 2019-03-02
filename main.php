@@ -55,6 +55,8 @@ showDealerHalfHand($dealersCards);
 
 while ($dealerHandStatus || $playerHandStatus) {
     //echo "Bet or stay?";
+
+    
     $line = readline("Type h to hit or s for stand \n");
 
     if ($line === "h"){
@@ -75,8 +77,11 @@ while ($dealerHandStatus || $playerHandStatus) {
 
         if($playerHandValue > 21){
             $playerHandStatus = false;
-            echo "You busted, you lose.";
-            exit();
+            echo "You busted, you lose. \n";
+            $bankAccount -= $betAmount;
+            echo "Your current bank account is now at " . $bankAccount . "\n";
+            
+            // exit();
         }
 
         //dealer gets a card
@@ -141,8 +146,8 @@ if($dealerHandValue < 22 && $dealerHandValue > 16){
 if($dealerHandValue > 22){
     echo "Dealer busts with a value of $dealerHandValue \n";
     $bankAccount += $betAmount;
-    echo "Your current bank account is now at " . $bankAccount;
-    echo "You win!";
+    echo "Your current bank account is now at " . $bankAccount . "\n";
+    echo "You win! \n";
 }
 
 if($dealerHandValue < $playerHandValue){
