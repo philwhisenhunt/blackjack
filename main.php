@@ -12,7 +12,7 @@ $bankAccount = 500;
 $betAmount = 50;
 $wantToPlay = true;
 
-//$cards = ['AH','JC', 'KH', '9C', 'JH' ];
+
 //blank cards $cards = ['A','K','Q','J','T', '9', '8', '7', '6', '5', '4', '3', '2'];
 
 $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2H',
@@ -23,19 +23,7 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
  echo "Shuffling cards ... \n";
  shuffle($cards);
 
-// print_r($cards);
-// die();
 
-
-
-//while ($dealerHandValue < 17 && $playerHandValue <22) {
-
-
-
-
-
-// while ($dealerHandStatus || $playerHandStatus) {
-    //change to while bank account greater than -500?
 while ($wantToPlay) {
 
     $playersCards[] = array_pop($cards);
@@ -54,39 +42,30 @@ while ($wantToPlay) {
         //die();
     }
     if($playerHandValue == 21){
-        echo "Blackjack!";
-        //die();
+        echo "You win with Blackjack!";
+        $bankAccount += $betAmount;
+        echo "Your current bank account is now at " . $bankAccount . "\n";
+        $playerHandStatus = false;
+        $dealerHandStatus = false;
     }
 
     echo "The value of your hand is $playerHandValue \n";
 
-    //display the dealer's cards
-    //how to hide the top card?
     echo "The dealer has: ";
     showDealerHalfHand($dealersCards);
-    //echo "Bet or stay?";
-
-    //Figure out how to shuffle cards after out
-    //add betting info for tie and blackjack
+    
 
     $playerHandValue = calculateHandValue($playersCards);
     $dealerHandValue = calculateHandValue($dealersCards);
 
     if($playerHandValue == 21 && $dealerHandValue == 21){
         echo "It was a tie";
-        //die();
+        
     }
     if($playerHandValue == 21){
         echo "Blackjack!";
-        //die();
+        
     }
-
-    echo "The value of your hand is $playerHandValue \n";
-
-    //display the dealer's cards
-    //how to hide the top card?
-    echo "The dealer has: ";
-    showDealerHalfHand($dealersCards);
 
     if($playerHandStatus){
     $line = readline("Type h to hit or s for stand \n");
@@ -129,18 +108,16 @@ while ($wantToPlay) {
 
         echo calculateHandValue($playersCards);
         echo "\n";
-
-        //set player status to false?
-
-     $playerHandStatus = false;
+        $playerHandStatus = false;
      
     }
 
 
-
+    /* Hiding this to debug
     $dealersCards[] = array_pop($cards);
     $dealerHandValue = calculateHandValue($dealersCards);
     echo "Dealer Hand value is " . $dealerHandValue . "\n";
+    */
 
     if ($dealerHandValue > 21){
         $dealerHandStatus = false;
@@ -180,28 +157,31 @@ while ($wantToPlay) {
     if($dealerHandValue > 22){
         $dealerHandStatus = false;
         echo "Dealer busts with a value of $dealerHandValue \n";
+        echo "You win! \n";
         $bankAccount += $betAmount;
         echo "Your current bank account is now at " . $bankAccount . "\n";
-        echo "You win! \n";
+        
     }
     
     if($dealerHandValue < $playerHandValue){
         
     }
 
-}
-//while statement should be for while money still in account. Or just any true statement. 
-$wantToPlay = false;
-$promptReplay = readline("Want to play again? (Y or N)\n");
-if($promptReplay == "y" || $promptReplay == "Y"){
-    $wantToPlay = true;
-    $playersCards = [];
-    $dealersCards =[];
-}
+    }
 
-else{
-    exit();
-}
+    $wantToPlay = false;
+    $promptReplay = readline("Want to play again? (Y or N)\n");
+    if($promptReplay == "y" || $promptReplay == "Y"){
+        $wantToPlay = true;
+        $playersCards = [];
+        $dealersCards =[];
+        $playerHandStatus = true;
+        $dealerHandStatus = true;
+    }
+
+    else{
+        exit();
+    }
 
 }
 
