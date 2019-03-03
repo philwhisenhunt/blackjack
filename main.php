@@ -10,6 +10,7 @@ $playerHandStatus = true;
 $dealerHandStatus = true;
 $bankAccount = 500;
 $betAmount = 50;
+$wantToPlay = true;
 
 //$cards = ['AH','JC', 'KH', '9C', 'JH' ];
 //blank cards $cards = ['A','K','Q','J','T', '9', '8', '7', '6', '5', '4', '3', '2'];
@@ -58,7 +59,7 @@ showDealerHalfHand($dealersCards);
 
 // while ($dealerHandStatus || $playerHandStatus) {
     //change to while bank account greater than -500?
-while (true) {
+while ($wantToPlay) {
     //echo "Bet or stay?";
 
     //Figure out how to shuffle cards after out
@@ -83,9 +84,9 @@ while (true) {
     echo "The dealer has: ";
     showDealerHalfHand($dealersCards);
 
-    
+    if($playerHandStatus){
     $line = readline("Type h to hit or s for stand \n");
-
+  
     if ($line === "h"){
         
         if($playerHandStatus){
@@ -132,6 +133,7 @@ while (true) {
     }
 
 
+
     $dealersCards[] = array_pop($cards);
     $dealerHandValue = calculateHandValue($dealersCards);
     echo "Dealer Hand value is " . $dealerHandValue . "\n";
@@ -141,7 +143,7 @@ while (true) {
         $playerHandStatus = false;
     }
 
-    if($dealerHandValue >17 ){
+    if($dealerHandValue >=17 ){
         $dealerHandStatus = false;
     }
 
@@ -156,6 +158,7 @@ while (true) {
         }
     
         else{
+            $dealerHandStatus = false;
             echo "dealer stands with a value of ";
             echo calculateHandValue($dealersCards);
             echo "\n";
@@ -165,6 +168,7 @@ while (true) {
     }
     
     if($dealerHandValue > 22){
+        $dealerHandStatus = false;
         echo "Dealer busts with a value of $dealerHandValue \n";
         $bankAccount += $betAmount;
         echo "Your current bank account is now at " . $bankAccount . "\n";
@@ -175,8 +179,18 @@ while (true) {
         
     }
 
-
+}
 //while statement should be for while money still in account. Or just any true statement. 
+$wantToPlay = false;
+$promptReplay = readline("Want to play again? (Y or N)\n");
+if($promptReplay == "y" || $promptReplay == "Y"){
+    $wantToPlay = true;
+}
+
+else{
+    exit();
+}
+
 }
 
 
