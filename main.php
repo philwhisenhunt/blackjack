@@ -26,13 +26,7 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
 // print_r($cards);
 // die();
 
-$playersCards[] = array_pop($cards);
-$playersCards[] = array_pop($cards);
-$dealersCards[] = array_pop($cards);
-$dealersCards[] = array_pop($cards);
 
-echo "Your cards are:\n";
-showHand($playersCards);
 
 //while ($dealerHandValue < 17 && $playerHandValue <22) {
 
@@ -43,6 +37,14 @@ showHand($playersCards);
 // while ($dealerHandStatus || $playerHandStatus) {
     //change to while bank account greater than -500?
 while ($wantToPlay) {
+
+    $playersCards[] = array_pop($cards);
+    $playersCards[] = array_pop($cards);
+    $dealersCards[] = array_pop($cards);
+    $dealersCards[] = array_pop($cards);
+
+    echo "Your cards are:\n";
+    showHand($playersCards);
 
     $playerHandValue = calculateHandValue($playersCards);
     $dealerHandValue = calculateHandValue($dealersCards);
@@ -158,6 +160,12 @@ while ($wantToPlay) {
             echo "Dealer wins \n";
             $bankAccount -= $betAmount;
         }
+
+        if($dealerHandValue < 17){
+           
+            $dealersCards[] = array_pop($cards);
+            
+        }
     
         else{
             $dealerHandStatus = false;
@@ -187,6 +195,8 @@ $wantToPlay = false;
 $promptReplay = readline("Want to play again? (Y or N)\n");
 if($promptReplay == "y" || $promptReplay == "Y"){
     $wantToPlay = true;
+    $playersCards = [];
+    $dealersCards =[];
 }
 
 else{
