@@ -36,30 +36,32 @@ showHand($playersCards);
 
 //while ($dealerHandValue < 17 && $playerHandValue <22) {
 
-$playerHandValue = calculateHandValue($playersCards);
-$dealerHandValue = calculateHandValue($dealersCards);
 
-if($playerHandValue == 21 && $dealerHandValue == 21){
-    echo "It was a tie";
-    //die();
-}
-if($playerHandValue == 21){
-    echo "Blackjack!";
-    //die();
-}
-
-echo "The value of your hand is $playerHandValue \n";
-
-//display the dealer's cards
-//how to hide the top card?
-echo "The dealer has: ";
-showDealerHalfHand($dealersCards);
 
 
 
 // while ($dealerHandStatus || $playerHandStatus) {
     //change to while bank account greater than -500?
 while ($wantToPlay) {
+
+    $playerHandValue = calculateHandValue($playersCards);
+    $dealerHandValue = calculateHandValue($dealersCards);
+
+    if($playerHandValue == 21 && $dealerHandValue == 21){
+        echo "It was a tie";
+        //die();
+    }
+    if($playerHandValue == 21){
+        echo "Blackjack!";
+        //die();
+    }
+
+    echo "The value of your hand is $playerHandValue \n";
+
+    //display the dealer's cards
+    //how to hide the top card?
+    echo "The dealer has: ";
+    showDealerHalfHand($dealersCards);
     //echo "Bet or stay?";
 
     //Figure out how to shuffle cards after out
