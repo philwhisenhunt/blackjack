@@ -68,104 +68,105 @@ while ($wantToPlay) {
     }
 
     if($playerHandStatus){
-    $line = readline("Type h to hit or s for stand \n");
+        //while handstatus is true AND cards are less than 21
+        $line = readline("Type h to hit or s for stand \n");
   
-    if ($line === "h"){
-        
-        if($playerHandStatus){
+        if ($line === "h"){
+            
+            if($playerHandStatus){
 
-        $playersCards[] = array_pop($cards);
+                $playersCards[] = array_pop($cards);
+            }
+            echo "Your cards are:\n";
+            showHand($playersCards);
+
+            echo "\nThe value of your hand is ";
+
+            $playerHandValue = calculateHandValue($playersCards);
+
+            echo $playerHandValue;
+
+            echo "\n \n";
+
+            if($playerHandValue > 21){
+                $playerHandStatus = false;
+                echo "You busted, you lose. \n";
+                $bankAccount -= $betAmount;
+                echo "Your current bank account is now at " . $bankAccount . "\n";
+                
+            }
+
+            //dealer gets a card
+            if($dealerHandStatus){
+                $dealersCards[] = array_pop($cards);
+            }
+
+            
         }
-        showHand($playersCards);
 
-        echo "\nThe value of your hand is ";
+        if ($line === "s"){
+            echo "Stand. The value of your hand is ";
 
-        $playerHandValue = calculateHandValue($playersCards);
-
-        echo $playerHandValue;
-
-        echo "\n \n";
-
-        if($playerHandValue > 21){
+            echo calculateHandValue($playersCards);
+            echo "\n";
             $playerHandStatus = false;
-            echo "You busted, you lose. \n";
-            $bankAccount -= $betAmount;
+        
+        }
+
+
+        /* Hiding this to debug
+        $dealersCards[] = array_pop($cards);
+        $dealerHandValue = calculateHandValue($dealersCards);
+        echo "Dealer Hand value is " . $dealerHandValue . "\n";
+        */
+
+        if ($dealerHandValue > 21){
+            $dealerHandStatus = false;
+            $playerHandStatus = false;
+        }
+
+        if($dealerHandValue >=17 ){
+            $dealerHandStatus = false;
+        }
+
+
+
+        $dealerHandValue = calculateHandValue($dealersCards);
+
+        if($dealerHandValue < 22 && $dealerHandValue > 16){
+            if($dealerHandValue == 21){
+                echo "Dealer wins \n";
+                $bankAccount -= $betAmount;
+            }
+
+            if($dealerHandValue < 17){
+            
+                $dealersCards[] = array_pop($cards);
+                
+            }
+        
+            else{
+                $dealerHandStatus = false;
+                echo "dealer stands with a value of ";
+                echo calculateHandValue($dealersCards);
+                echo "\n";
+            }
+        
+            
+        }
+        
+        if($dealerHandValue > 22){
+            $dealerHandStatus = false;
+            echo "Dealer busts with a value of $dealerHandValue \n";
+            echo "You win! \n";
+            $bankAccount += $betAmount;
             echo "Your current bank account is now at " . $bankAccount . "\n";
             
-            // exit();
         }
-
-        //dealer gets a card
-        if($dealerHandStatus){
-            $dealersCards[] = array_pop($cards);
-        }
-
         
-    }
-
-    if ($line === "s"){
-        echo "Stand. The value of your hand is ";
-
-        echo calculateHandValue($playersCards);
-        echo "\n";
-        $playerHandStatus = false;
-     
-    }
-
-
-    /* Hiding this to debug
-    $dealersCards[] = array_pop($cards);
-    $dealerHandValue = calculateHandValue($dealersCards);
-    echo "Dealer Hand value is " . $dealerHandValue . "\n";
-    */
-
-    if ($dealerHandValue > 21){
-        $dealerHandStatus = false;
-        $playerHandStatus = false;
-    }
-
-    if($dealerHandValue >=17 ){
-        $dealerHandStatus = false;
-    }
-
-
-
-    $dealerHandValue = calculateHandValue($dealersCards);
-
-    if($dealerHandValue < 22 && $dealerHandValue > 16){
-        if($dealerHandValue == 21){
-            echo "Dealer wins \n";
-            $bankAccount -= $betAmount;
-        }
-
-        if($dealerHandValue < 17){
-           
-            $dealersCards[] = array_pop($cards);
+        if($dealerHandValue < $playerHandValue){
             
         }
-    
-        else{
-            $dealerHandStatus = false;
-            echo "dealer stands with a value of ";
-            echo calculateHandValue($dealersCards);
-            echo "\n";
-        }
-    
-        
-    }
-    
-    if($dealerHandValue > 22){
-        $dealerHandStatus = false;
-        echo "Dealer busts with a value of $dealerHandValue \n";
-        echo "You win! \n";
-        $bankAccount += $betAmount;
-        echo "Your current bank account is now at " . $bankAccount . "\n";
-        
-    }
-    
-    if($dealerHandValue < $playerHandValue){
-        
-    }
 
     }
 
