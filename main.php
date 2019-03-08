@@ -26,8 +26,10 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
 
 while ($wantToPlay) {
 
-    $playersCards[] = array_pop($cards);
-    $playersCards[] = array_pop($cards);
+    // $playersCards[] = array_pop($cards);
+    // $playersCards[] = array_pop($cards);
+
+    $playersCards = ['TC', '6C']; // for testing    
     $dealersCards[] = array_pop($cards);
     $dealersCards[] = array_pop($cards);
 
@@ -37,17 +39,32 @@ while ($wantToPlay) {
     $playerHandValue = calculateHandValue($playersCards);
     $dealerHandValue = calculateHandValue($dealersCards);
 
+    //check most complex thing first
     if($playerHandValue == 21 && $dealerHandValue == 21){
         echo "It was a tie";
         //die();
+        $playerHandStatus = false;
+        $dealerHandStatus = false;
     }
-    if($playerHandValue == 21){
+
+   else if($playerHandValue == 21){
         echo "You win with Blackjack!";
         $bankAccount += $betAmount;
         echo "Your current bank account is now at " . $bankAccount . "\n";
         $playerHandStatus = false;
         $dealerHandStatus = false;
     }
+
+    else if(false) { //dealer has 21
+        
+    }
+
+    else{
+
+        //move everything in here
+    }
+
+    
 
     echo "The value of your hand is $playerHandValue \n";
 
@@ -67,13 +84,13 @@ while ($wantToPlay) {
         
     }
 
-    if($playerHandStatus){
+    if($playerHandStatus){//while players turn
         //while handstatus is true AND cards are less than 21
         $line = readline("Type h to hit or s for stand \n");
   
         if ($line === "h"){
             
-            if($playerHandStatus){
+            if($playerHandStatus){//no
 
                 $playersCards[] = array_pop($cards);
             }
@@ -97,7 +114,7 @@ while ($wantToPlay) {
             }
 
             //dealer gets a card
-            if($dealerHandStatus){
+            if($dealerHandStatus){//mpvction flowe out of players a
                 $dealersCards[] = array_pop($cards);
             }
 
@@ -113,6 +130,12 @@ while ($wantToPlay) {
         
         }
 
+        //player is done end of while
+        //dealer action flow start
+
+        //end dealer flow
+
+        //determine winner
 
         /* Hiding this to debug
         $dealersCards[] = array_pop($cards);
