@@ -107,6 +107,11 @@ while ($wantToPlay) {
             echo "\n \n";
 
             if($playerHandValue > 21){
+                //check for aces. If ace, then try the value minus 10. 
+
+
+
+
                 $playerHandStatus = false;
                 echo "You busted, you lose. \n";
                 $bankAccount -= $betAmount;
@@ -114,10 +119,7 @@ while ($wantToPlay) {
                 
             }
 
-            //dealer gets a card
-            if($dealerHandStatus){//mpvction flowe out of players a
-                $dealersCards[] = array_pop($cards);
-            }
+        
 
             
         }
@@ -143,6 +145,14 @@ while ($wantToPlay) {
         $dealerHandValue = calculateHandValue($dealersCards);
         echo "Dealer Hand value is " . $dealerHandValue . "\n";
         */
+
+        //moved this out of the way (dealer doesn't get a turn until player is done)
+        /*
+            //dealer gets a card
+            if($dealerHandStatus){//move out of players action flow
+                $dealersCards[] = array_pop($cards);
+            }
+            */
 
         if ($dealerHandValue > 21){
             $dealerHandStatus = false;
