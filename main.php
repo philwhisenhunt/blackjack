@@ -2,6 +2,7 @@
 require 'showHand.php';
 require "calculateHandValue.php";
 require 'showDealerHalfHand.php';
+require 'cardValueMaker.php';
 $dealerHandValue = 0;
 $playerHandValue = 0;
 $playersCards = [];
@@ -22,7 +23,9 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
  'AC','KC','QC','JC','TC', '9C', '8C', '7C', '6C', '5C', '4C', '3C', '2C'];
 
  echo "Shuffling cards ... \n";
- shuffle($cards);
+ //disabled for now to use certain cards
+ $cards = ['QH', 'JH'];//resume here and make 22 default
+ //shuffle($cards);
 
 
 while ($wantToPlay) {
@@ -30,9 +33,12 @@ while ($wantToPlay) {
     // $playersCards[] = array_pop($cards);
     // $playersCards[] = array_pop($cards);
 
-    $playersCards = ['TC', '6C']; // for testing    
+    //$playersCards = ['TC', '6C']; // for testing  
+    $playersCards = ['AH', '9D'];  
+    //$dealersCards[] = array_pop($cards);
     $dealersCards[] = array_pop($cards);
-    $dealersCards[] = array_pop($cards);
+    $dealersCards = ['AS', '2H'];  
+
 
     echo "Your cards are:\n";
     showHand($playersCards);
@@ -109,15 +115,42 @@ while ($wantToPlay) {
             if($playerHandValue > 21){
                 //check for aces. If ace, then try the value minus 10. 
 
+                //split up the cards and remove the suit, to render an array of their value
+                for($i=0; $i<count($playersCards); $i++){
+
+                    //take each card and turn it into an array (of two letters or numbers)
+                    $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
+                    
+            
+                    //get the value or whatever the first card is (without the suit)
+                    $cardValueArray[] = cardValueMaker($splitHand[0]);
+                   // print_r($cardValueArray);
+                    
+                }
+                //loop through the array to see if a car is worth 11. If it is, then it may be causing the bust, so deduct 10. 
+                for($i=0; $i<count($cardValueArray); $i++){
+                    // echo 'The variable $cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
+                    if($cardValueArray[$i] == 11){
+                        $playerHandValue -= 10;
+                        echo 'The $playerHandValue is ' . $playerHandValue . "\n";
+
+                        if($playerHandValue >21){
+                            $playerHandStatus = false;
+                            echo "You busted, you lose. \n";
+                            $bankAccount -= $betAmount;
+                            echo "Your current bank account is now at " . $bankAccount . "\n";
+                        }
 
 
+                    }
 
-                $playerHandStatus = false;
-                echo "You busted, you lose. \n";
-                $bankAccount -= $betAmount;
-                echo "Your current bank account is now at " . $bankAccount . "\n";
+                }
                 
-            }
+                
+            } // end if >21
+
+            
+           // echo 'The $playerHandValue right after that loop is ' . $playerHandValue . "\n";
 
         
 

@@ -1,6 +1,6 @@
 <?php
 
-require 'cardValueMaker.php';
+//require 'cardValueMaker.php';
 
 function calculateHandValue($playerHand){ //[2H, 9S]
 
@@ -13,15 +13,15 @@ function calculateHandValue($playerHand){ //[2H, 9S]
         $splitHand = str_split($playerHand[$i]); //2H $playerHand[i][0]
         //[2,H]
 
-    //get the value or whatever the first card is (without the suit)
-    $cardValueArray[] = cardValueMaker($splitHand[0]);
-    //[2,9]
-    //echo "The cardValueArray is ";
-    //print_r($cardValueArray);
-    
+        //get the value or whatever the first card is (without the suit)
+        $cardValueArray[] = cardValueMaker($splitHand[0]);
+        //[2,9]
+        //echo "The cardValueArray is ";
+        //print_r($cardValueArray);
+        
 
-    //echo "The cardValueArray is ";
-    //print_r($cardValueArray);
+        //echo "The cardValueArray is ";
+        //print_r($cardValueArray);
     }
     return array_sum($cardValueArray);
 
