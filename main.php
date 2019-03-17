@@ -137,7 +137,8 @@ while ($wantToPlay) {
                         echo 'The $playerHandValue is ' . $playerHandValue . "\n";
 
                         if($playerHandValue >21){
-
+                            //check for ace again here
+                            //for single deck this would need to be 4 times, but at this point a function is needed.
 
 
 
