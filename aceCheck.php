@@ -1,33 +1,42 @@
 <?php
 
 function aceCheck($cardValueArray){
-    if(array_sum($cardValueArray) > 21){
+    //if(array_sum($cardValueArray) > 21){
         echo "Running \n";
-        
-        for($i=0; $i<count($cardValueArray); $i++){
-            // echo 'The variable $cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
-            if($cardValueArray[$i] == 11){
-                $cardValueArray[$i] = 1;
-                //echo '$cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
-                //echo '$cardValueArray value is ' . array_sum($cardValueArray) . "\n";
-
-                if(array_sum($cardValueArray) < 21 ){
-                
-                    echo "Hit this part and the sum we are looking at is " . array_sum($cardValueArray) . "\n";
-                    return array_sum($cardValueArray);
-
-                }
-
+        while(in_array(11, $cardValueArray) && array_sum($cardValueArray) > 21){
+            //echo "The while statement is still true";
+            for($i=0; $i<count($cardValueArray); $i++){
+                // echo 'The variable $cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
+                echo '$i is at ' . $i . "\n";
+                if($cardValueArray[$i] == 11){
+                    $cardValueArray[$i] = 1;
+                    //echo '$cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
+                    //echo '$cardValueArray value is ' . array_sum($cardValueArray) . "\n";
     
+                    if(array_sum($cardValueArray) < 21 ){
+                        echo "Success! \n"; 
+                        return array_sum($cardValueArray);
+    
+                    }
+                    // else{
+                    //     return array_sum($cardValueArray);
+                    // }
+    
+        
+                }
+           
             }
-       
+            
         }
-        echo "Stayed in the if";
-    }
-    else{
-        echo "Hit the else statement";
-        return array_sum($cardValueArray);
-    }
+        return array_sum($cardValueArray); 
+
+        
+        
+    //}
+    // else{
+    //     echo "Hit the else statement";
+    //     return array_sum($cardValueArray);
+    // }
    
 }
 

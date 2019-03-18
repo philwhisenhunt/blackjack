@@ -25,13 +25,10 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
 
  echo "Shuffling cards ... \n";
  //disabled for now to use certain cards
- $cards = ['AH', 'AC', 'AH', 'AC', 'AH', 'AC'];//resume here and make 22 default
+ //$cards = ['AH', 'AC', 'AH', 'AC', 'AH', 'AC'];//resume here and make 22 default
  //shuffle($cards);
 
-
-while ($wantToPlay) {
-
-    // $playersCards[] = array_pop($cards);
+   // $playersCards[] = array_pop($cards);
     // $playersCards[] = array_pop($cards);
 
     //$playersCards = ['TC', '6C']; // for testing  
@@ -41,268 +38,141 @@ while ($wantToPlay) {
     $dealersCards = ['AS', '2H'];  
 
 
-    echo "Your cards are:\n";
-    showHand($playersCards);
-
-    $playerHandValue = calculateHandValue($playersCards);
-    $dealerHandValue = calculateHandValue($dealersCards);
-
-    //check most complex thing first
-
-    if($playerHandValue > 21){
-        
-        //check for aces. If ace, then try the value minus 10. 
-
-               //split up the cards and remove the suit, to render an array of their value
-               for($i=0; $i<count($playersCards); $i++){
-
-                   //take each card and turn it into an array (of two letters or numbers)
-                   $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
-                   
-                   
-           
-                   //get the value or whatever the first card is (without the suit)
-                   $cardValueArray[] = cardValueMaker($splitHand[0]);
-                   
-                  
-               }   
-               print_r($cardValueArray);
-
-               $playerHandValue = aceCheck($cardValueArray);
-               echo "Recalculated aces and the card value is now: ";
-               echo $playerHandValue;
-               echo "\n";
-               
-              // print_r($cardValueArray);
-   }
-
-    elseif($playerHandValue == 21 && $dealerHandValue == 21){
-        echo "It was a tie";
-        //die();
-        $playerHandStatus = false;
-        $dealerHandStatus = false;
-    }
-
-    elseif($dealerHandValue == 21){
-        echo "Dealer wins. ";
-        $bankAccount -= $betAmount;
-        echo "Your current bank account is now at " . $bankAccount . "\n";
-        $playerHandStatus = false;
-        $dealerHandStatus = false;
-    }
-
-   elseif($playerHandValue == 21){
-        echo "You win with Blackjack!";
-        $bankAccount += $betAmount;
-        echo "Your current bank account is now at " . $bankAccount . "\n";
-        $playerHandStatus = false;
-        $dealerHandStatus = false;
-    }
-
-
-    else{
-
-        //move everything in here
-        echo "!!!The value of your hand is $playerHandValue \n";
-
-
-
-
-    }
-
-    
-
-    // echo "The value of your hand is $playerHandValue \n";
-
-    echo "The dealer has: ";
-    showDealerHalfHand($dealersCards);
-    
-
-    $playerHandValue = calculateHandValue($playersCards);
-    $dealerHandValue = calculateHandValue($dealersCards);
-
-    if($playerHandValue == 21 && $dealerHandValue == 21){
-        echo "It was a tie";
-        
-    }
-    if($playerHandValue == 21){
-        echo "Blackjack!";
-        
-    }
-
-    if($playerHandStatus){//while players turn
-        //while handstatus is true AND cards are less than 21
-        $line = readline("Type h to hit or s for stand \n");
   
-        if ($line === "h"){
+
+
+while ($wantToPlay) {
+
+    while($playerHandStatus){
+        echo "Hit this ---- \n";
+
+   
+        echo "Your cards are:\n";
+        showHand($playersCards);
+
+        $playerHandValue = calculateHandValue($playersCards);
+       // $dealerHandValue = calculateHandValue($dealersCards);
+        echo $playerHandValue . "\n";
+       
+
+    
+
+        //check most complex thing first
+
+        if($playerHandValue > 21){
             
-            if($playerHandStatus){//no
+            //check for aces. If ace, then try the value minus 10. 
 
-                $playersCards[] = array_pop($cards);
-            }
-            echo "Your cards are:\n";
-            showHand($playersCards);
+            $cardValueArray = [];
+            //get the value or whatever the first card is (without the suit)
+            // echo "Print the cardValueArray before: ";
+            // print_r($cardValueArray);
 
-            echo "\nThe value of your hand is ";
+            //loop through and split up the cards and remove the suit, to render an array of their value
+            for($i=0; $i<count($playersCards); $i++){
 
-            $playerHandValue = calculateHandValue($playersCards);
+                //take each card and turn it into an array (of two letters or numbers)
+                $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
+                
+                $cardValueArray[] = cardValueMaker($splitHand[0]);
+                // echo "Print the cardValueArray after: ";
+                // print_r($cardValueArray);
 
-            echo $playerHandValue;
+            }   
+            print_r($cardValueArray);
+            echo "The sum of the values is: " . array_sum($cardValueArray) . "\n";
 
-            echo "\n \n";
+
+            //print_r($cardValueArray);
+            //check if there are aces in card value array
+            $playerHandValue = aceCheck($cardValueArray);
+            echo 'This should say 12: ' . $playerHandValue . "\n";
+            
 
             if($playerHandValue > 21){
-                //check for aces. If ace, then try the value minus 10. 
-
-                //split up the cards and remove the suit, to render an array of their value
-                for($i=0; $i<count($playersCards); $i++){
-
-                    //take each card and turn it into an array (of two letters or numbers)
-                    $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
-                    
-            
-                    //get the value or whatever the first card is (without the suit)
-                    $cardValueArray[] = cardValueMaker($splitHand[0]);
-                   // print_r($cardValueArray);
-                    
-                }
-
-                //Now that we have the values of the array, check for aces.
-                $playerHandValue = aceCheck($cardValueArray);
-
-                /*
-                //loop through the array to see if a car is worth 11. If it is, then it may be causing the bust, so deduct 10. 
-                for($i=0; $i<count($cardValueArray); $i++){
-                    // echo 'The variable $cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
-                    if($cardValueArray[$i] == 11){
-                        //pop the card off the array, so that we can check for more aces.
-                        //probably should move this to a function.
-                        $playerHandValue -= 10;
-                        echo 'The $playerHandValue is ' . $playerHandValue . "\n";
-
-                        if($playerHandValue >21){
-                            //check for ace again here
-                            //for single deck this would need to be 4 times, but at this point a function is needed.
-
-
-
-                            $playerHandStatus = false;
-                            echo "You busted, you lose. \n";
-                            $bankAccount -= $betAmount;
-                            echo "Your current bank account is now at " . $bankAccount . "\n";
-                        }
-
-
-                    }
-
-                }
-
-                */
-                
-                
-            } // end if >21
-
-            
-           // echo 'The $playerHandValue right after that loop is ' . $playerHandValue . "\n";
-
-        
-
-            
-        }
-
-        if ($line === "s"){
-            echo "Stand. The value of your hand is ";
-
-            echo calculateHandValue($playersCards);
-            echo "\n";
-            $playerHandStatus = false;
-        
-        }
-
-        //player is done end of while
-        //dealer action flow start
-
-        //end dealer flow
-
-        //determine winner
-
-        /* Hiding this to debug
-        $dealersCards[] = array_pop($cards);
-        $dealerHandValue = calculateHandValue($dealersCards);
-        echo "Dealer Hand value is " . $dealerHandValue . "\n";
-        */
-
-        //moved this out of the way (dealer doesn't get a turn until player is done)
-        /*
-            //dealer gets a card
-            if($dealerHandStatus){//move out of players action flow
-                $dealersCards[] = array_pop($cards);
+                $playerHandStatus = false;
             }
-            */
-
-        if ($dealerHandValue > 21){
-            $dealerHandStatus = false;
-            $playerHandStatus = false;
-        }
-
-        if($dealerHandValue >=17 ){
-            $dealerHandStatus = false;
-        }
-
-
-
-        $dealerHandValue = calculateHandValue($dealersCards);
-
-        if($dealerHandValue < 22 && $dealerHandValue > 16){
-            if($dealerHandValue == 21){
-                echo "Dealer wins \n";
-                $bankAccount -= $betAmount;
-            }
-
-            if($dealerHandValue < 17){
-            
-                $dealersCards[] = array_pop($cards);
-                
-            }
-        
             else{
-                $dealerHandStatus = false;
-                echo "dealer stands with a value of ";
-                echo calculateHandValue($dealersCards);
-                echo "\n";
+                //at this point, the hand value is still 11
             }
-        
             
-        }
-        
-        if($dealerHandValue > 22){
-            $dealerHandStatus = false;
-            echo "Dealer busts with a value of $dealerHandValue \n";
-            echo "You win! \n";
-            $bankAccount += $betAmount;
-            echo "Your current bank account is now at " . $bankAccount . "\n";
-            
-        }
-        
-        if($dealerHandValue < $playerHandValue){
-            
-        }
+            // print_r($cardValueArray);
+            echo 'This should say 12: ' . $playerHandValue . "\n";
 
     }
+
+    //if it is still over 21, then stop
+    if($playerHandValue > 21){
+            $playerHandStatus = false;
+            echo "You busted, you lose. \n";
+            $bankAccount -= $betAmount;
+            echo "Your current bank account is now at " . $bankAccount . "\n";
+
+            echo "Your cards were: ";
+            print_r($playersCards);
+
+    }
+
+    if($playerHandValue == 21 && $dealerHandValue == 21){
+            echo "It was a tie";
+            //die();
+            $playerHandStatus = false;
+            $dealerHandStatus = false;
+        }
+
+        elseif($dealerHandValue == 21){
+            echo "Dealer wins. ";
+            $bankAccount -= $betAmount;
+            echo "Your current bank account is now at " . $bankAccount . "\n";
+            $playerHandStatus = false;
+            $dealerHandStatus = false;
+        }
+
+    elseif($playerHandValue == 21){
+            echo "You win with Blackjack!";
+            $bankAccount += $betAmount;
+            echo "Your current bank account is now at " . $bankAccount . "\n";
+            $playerHandStatus = false;
+            $dealerHandStatus = false;
+        }
+
+
+        elseif($playerHandValue < 21){
+
+            //move everything in here
+            //echo "!!!The value of your hand is $playerHandValue \n";
+            //echo "\n" . 'Reached else and the playerHandStatus is '. $playerHandStatus . "\n";
+
+            if($playerHandStatus){//while players turn
+                //while handstatus is true AND cards are less than 21
+                $line = readline("Type h to hit or s for stand \n");
+            
+                if ($line === "h"){
+                    //give them a card
+                    $playersCards[] = array_pop($cards);
+                }
+
+                //add if s
+            }
+
+
+
+        }
+    }//end of player status being true
 
     $wantToPlay = false;
     $promptReplay = readline("Want to play again? (Y or N)\n");
+
     if($promptReplay == "y" || $promptReplay == "Y"){
         $wantToPlay = true;
         $playersCards = [];
         $dealersCards =[];
         $playerHandStatus = true;
         $dealerHandStatus = true;
+  
     }
 
-    else{
-        exit();
-    }
+    exit();   
 
 }
 
