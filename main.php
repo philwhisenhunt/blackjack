@@ -44,7 +44,7 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
 while ($wantToPlay) {
 
     while($playerHandStatus){
-        echo "Hit this ---- \n";
+        // echo "Hit this ---- \n";
 
    
         echo "Your cards are:\n";
@@ -52,7 +52,7 @@ while ($wantToPlay) {
 
         $playerHandValue = calculateHandValue($playersCards);
        // $dealerHandValue = calculateHandValue($dealersCards);
-        echo $playerHandValue . "\n";
+       // echo $playerHandValue . "\n";
        
 
     
@@ -79,14 +79,15 @@ while ($wantToPlay) {
                 // print_r($cardValueArray);
 
             }   
-            print_r($cardValueArray);
+            //print_r($cardValueArray);
             echo "The sum of the values is: " . array_sum($cardValueArray) . "\n";
 
 
             //print_r($cardValueArray);
             //check if there are aces in card value array
             $playerHandValue = aceCheck($cardValueArray);
-            echo 'This should say 12: ' . $playerHandValue . "\n";
+            echo "Adjusting for aces, your hand is worth: " . $playerHandValue . "\n";
+            // echo 'This should say 12: ' . $playerHandValue . "\n";
             
 
             if($playerHandValue > 21){
@@ -97,7 +98,7 @@ while ($wantToPlay) {
             }
             
             // print_r($cardValueArray);
-            echo 'This should say 12: ' . $playerHandValue . "\n";
+            // echo 'This should say 12: ' . $playerHandValue . "\n";
 
     }
 
@@ -152,7 +153,16 @@ while ($wantToPlay) {
                     $playersCards[] = array_pop($cards);
                 }
 
-                //add if s
+                //add if stand
+                if ($line === "s"){
+                    echo "Stand. The value of your hand is ";
+                    echo ($playerHandValue);
+                    //aceCheck($playerHandValue);
+                    //echo calculateHandValue($playersCards);
+                    echo "\n";
+                    $playerHandStatus = false;
+                
+                }
             }
 
 
