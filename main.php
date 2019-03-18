@@ -25,7 +25,7 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
 
  echo "Shuffling cards ... \n";
  //disabled for now to use certain cards
- $cards = ['AH', 'AC'];//resume here and make 22 default
+ $cards = ['AH', 'AC', 'AH', 'AC', 'AH', 'AC'];//resume here and make 22 default
  //shuffle($cards);
 
 
@@ -48,9 +48,45 @@ while ($wantToPlay) {
     $dealerHandValue = calculateHandValue($dealersCards);
 
     //check most complex thing first
-    if($playerHandValue == 21 && $dealerHandValue == 21){
+
+    if($playerHandValue > 21){
+        
+        //check for aces. If ace, then try the value minus 10. 
+
+               //split up the cards and remove the suit, to render an array of their value
+               for($i=0; $i<count($playersCards); $i++){
+
+                   //take each card and turn it into an array (of two letters or numbers)
+                   $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
+                   
+                   
+           
+                   //get the value or whatever the first card is (without the suit)
+                   $cardValueArray[] = cardValueMaker($splitHand[0]);
+                   
+                  
+               }   
+               print_r($cardValueArray);
+
+               $playerHandValue = aceCheck($cardValueArray);
+               echo "Recalculated aces and the card value is now: ";
+               echo $playerHandValue;
+               echo "\n";
+               
+              // print_r($cardValueArray);
+   }
+
+    elseif($playerHandValue == 21 && $dealerHandValue == 21){
         echo "It was a tie";
         //die();
+        $playerHandStatus = false;
+        $dealerHandStatus = false;
+    }
+
+    elseif($dealerHandValue == 21){
+        echo "Dealer wins. ";
+        $bankAccount -= $betAmount;
+        echo "Your current bank account is now at " . $bankAccount . "\n";
         $playerHandStatus = false;
         $dealerHandStatus = false;
     }
@@ -63,45 +99,20 @@ while ($wantToPlay) {
         $dealerHandStatus = false;
     }
 
-    elseif($playerHandValue > 21){
-        
-         //check for aces. If ace, then try the value minus 10. 
-
-                //split up the cards and remove the suit, to render an array of their value
-                for($i=0; $i<count($playersCards); $i++){
-
-                    //take each card and turn it into an array (of two letters or numbers)
-                    $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
-                    
-                    
-            
-                    //get the value or whatever the first card is (without the suit)
-                    $cardValueArray[] = cardValueMaker($splitHand[0]);
-                    
-                   
-                }   
-                print_r($cardValueArray);
-
-                $playerHandValue = aceCheck($cardValueArray);
-                echo "Card value is now: ";
-                echo $playerHandValue;
-                echo "\n";
-                
-               // print_r($cardValueArray);
-    }
-
-    elseif(false) { //dealer has 21
-        
-    }
 
     else{
 
         //move everything in here
+        echo "!!!The value of your hand is $playerHandValue \n";
+
+
+
+
     }
 
     
 
-    echo "The value of your hand is $playerHandValue \n";
+    // echo "The value of your hand is $playerHandValue \n";
 
     echo "The dealer has: ";
     showDealerHalfHand($dealersCards);
