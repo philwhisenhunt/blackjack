@@ -170,6 +170,11 @@ while ($wantToPlay) {
         }
     }//end of player status being true
 
+    //now add the dealer stuff
+    //use another while loop
+    //if less than 17 add a card
+
+
     $wantToPlay = false;
     $promptReplay = readline("Want to play again? (Y or N)\n");
 
