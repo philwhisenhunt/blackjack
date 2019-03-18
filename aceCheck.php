@@ -9,6 +9,10 @@ function aceCheck($cardValueArray){
             $playerHandValue -= 10;
             echo 'The $playerHandValue is ' . $playerHandValue . "\n";
         }
+        //is this the best way to add recursion?
+        if($cardValueArray > 21){
+            aceCheck($cardValueArray);
+        }
     }
 
         //add recursion?
