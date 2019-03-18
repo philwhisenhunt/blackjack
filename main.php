@@ -3,6 +3,7 @@ require 'showHand.php';
 require "calculateHandValue.php";
 require 'showDealerHalfHand.php';
 require 'cardValueMaker.php';
+require 'aceCheck.php';
 $dealerHandValue = 0;
 $playerHandValue = 0;
 $playersCards = [];
@@ -24,7 +25,7 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
 
  echo "Shuffling cards ... \n";
  //disabled for now to use certain cards
- $cards = ['QH', 'JH'];//resume here and make 22 default
+ $cards = ['AH', 'AC'];//resume here and make 22 default
  //shuffle($cards);
 
 
@@ -34,7 +35,7 @@ while ($wantToPlay) {
     // $playersCards[] = array_pop($cards);
 
     //$playersCards = ['TC', '6C']; // for testing  
-    $playersCards = ['AH', '9D'];  
+    $playersCards = ['AH', 'AD'];  
     //$dealersCards[] = array_pop($cards);
     $dealersCards[] = array_pop($cards);
     $dealersCards = ['AS', '2H'];  
@@ -54,7 +55,7 @@ while ($wantToPlay) {
         $dealerHandStatus = false;
     }
 
-   else if($playerHandValue == 21){
+   elseif($playerHandValue == 21){
         echo "You win with Blackjack!";
         $bankAccount += $betAmount;
         echo "Your current bank account is now at " . $bankAccount . "\n";
@@ -62,7 +63,12 @@ while ($wantToPlay) {
         $dealerHandStatus = false;
     }
 
-    else if(false) { //dealer has 21
+    elseif($playerHandValue > 21){
+        
+        
+    }
+
+    elseif(false) { //dealer has 21
         
     }
 
@@ -127,6 +133,11 @@ while ($wantToPlay) {
                    // print_r($cardValueArray);
                     
                 }
+
+                //Now that we have the values of the array, check for aces.
+                $playerHandValue = aceCheck($cardValueArray);
+
+                /*
                 //loop through the array to see if a car is worth 11. If it is, then it may be causing the bust, so deduct 10. 
                 for($i=0; $i<count($cardValueArray); $i++){
                     // echo 'The variable $cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
@@ -152,6 +163,8 @@ while ($wantToPlay) {
                     }
 
                 }
+
+                */
                 
                 
             } // end if >21
