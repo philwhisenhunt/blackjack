@@ -25,3 +25,9 @@ function aceCheck($cardValueArray){
         return $playerHandValue;
 
 }
+
+/*
+Just build for four aces at first.
+If there is an ace, then replace its value with one. Recalculate the sum.
+
+If it is still more than 21, then calculate again, replacing the 11 with a 1, again. 
