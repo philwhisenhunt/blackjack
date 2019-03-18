@@ -1,18 +1,37 @@
 <?php
 
 function aceCheck($cardValueArray){
-    for($i=0; $i<count($cardValueArray); $i++){
-        // echo 'The variable $cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
-        if($cardValueArray[$i] == 11){
-            $cardValueArray[$i] = 1;
-            aceCheck($cardValueArray);
-
-        }
+    if(array_sum($cardValueArray) > 21){
+        echo "Running \n";
         
-        else{
-            return calculateHandValue($cardValueArray);
+        for($i=0; $i<count($cardValueArray); $i++){
+            // echo 'The variable $cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
+            if($cardValueArray[$i] == 11){
+                $cardValueArray[$i] = 1;
+                echo '$cardValueArray[$i] is ' . $cardValueArray[$i] . "\n";
+                echo '$cardValueArray value is ' . array_sum($cardValueArray) . "\n";
+
+                if(array_sum($cardValueArray) > 21){
+                    aceCheck($cardValueArray);
+
+                }
+
+                else{
+                    return array_sum($cardValueArray);
+                }
+
+    
+            }
+            
+            else{
+                return array_sum($cardValueArray);
+            }
         }
     }
+    else{
+        return array_sum($cardValueArray);
+    }
+   
 }
 
 /*

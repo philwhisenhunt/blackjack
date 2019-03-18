@@ -37,7 +37,7 @@ while ($wantToPlay) {
     //$playersCards = ['TC', '6C']; // for testing  
     $playersCards = ['AH', 'AD'];  
     //$dealersCards[] = array_pop($cards);
-    $dealersCards[] = array_pop($cards);
+    //$dealersCards[] = array_pop($cards);
     $dealersCards = ['AS', '2H'];  
 
 
@@ -65,7 +65,29 @@ while ($wantToPlay) {
 
     elseif($playerHandValue > 21){
         
-        
+         //check for aces. If ace, then try the value minus 10. 
+
+                //split up the cards and remove the suit, to render an array of their value
+                for($i=0; $i<count($playersCards); $i++){
+
+                    //take each card and turn it into an array (of two letters or numbers)
+                    $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
+                    
+                    
+            
+                    //get the value or whatever the first card is (without the suit)
+                    $cardValueArray[] = cardValueMaker($splitHand[0]);
+                    
+                   
+                }   
+                print_r($cardValueArray);
+
+                $playerHandValue = aceCheck($cardValueArray);
+                echo "Card value is now: ";
+                echo $playerHandValue;
+                echo "\n";
+                
+               // print_r($cardValueArray);
     }
 
     elseif(false) { //dealer has 21
