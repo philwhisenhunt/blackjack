@@ -168,11 +168,44 @@ while ($wantToPlay) {
 
 
         }
-    }//end of player status being true
+    }//end of while player status being true
 
     //now add the dealer stuff
     //use another while loop
     //if less than 17 add a card
+
+    echo 'The dealer\'s cards are: ';
+    showHand($dealersCards);
+    $dealerHandValue = calculateHandValue($dealersCards);
+
+    echo '-------$dealerHandValue is ' . $dealerHandValue . "\n";
+
+    while($dealerHandStatus){
+        $dealerHandValue = calculateHandValue($dealersCards);
+
+        echo '-------$dealerHandValue is ' . $dealerHandValue . "\n";
+
+        if($dealerHandValue > 21){
+            echo 'Dealer busted' . "\n";
+            $dealerHandStatus = false;
+        }
+
+        if($dealerHandValue == 21){
+            echo 'Dealer has 21' . "\n";
+            $dealerHandStatus = false;
+        }
+
+        if($dealerHandValue <= 21 && $dealerHandValue > 16){
+            echo 'Dealer stands'. "\n";
+            $dealerHandStatus = false;
+        }
+
+        else{
+            echo 'Dealer hits' . "\n";
+            $dealersCards[] = array_pop($cards);
+        }
+
+    }
 
 
     $wantToPlay = false;
