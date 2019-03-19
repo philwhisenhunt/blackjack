@@ -4,6 +4,7 @@ require "calculateHandValue.php";
 require 'showDealerHalfHand.php';
 require 'cardValueMaker.php';
 require 'aceCheck.php';
+
 $dealerHandValue = 0;
 $playerHandValue = 0;
 $playersCards = [];
@@ -13,6 +14,7 @@ $dealerHandStatus = true;
 $bankAccount = 500;
 $betAmount = 50;
 $wantToPlay = true;
+$playerBust = false;
 
 
 //blank cards $cards = ['A','K','Q','J','T', '9', '8', '7', '6', '5', '4', '3', '2'];
@@ -24,27 +26,27 @@ $cards = ['AH','KH','QH','JH','TH', '9H', '8H', '7H', '6H', '5H', '4H', '3H', '2
  'AC','KC','QC','JC','TC', '9C', '8C', '7C', '6C', '5C', '4C', '3C', '2C'];
 
  echo "Shuffling cards ... \n";
- //disabled for now to use certain cards
+ //for use testing
  //$cards = ['AH', 'AC', 'AH', 'AC', 'AH', 'AC'];//resume here and make 22 default
- //shuffle($cards);
-
-   // $playersCards[] = array_pop($cards);
-    // $playersCards[] = array_pop($cards);
-
-    //$playersCards = ['TC', '6C']; // for testing  
-    $playersCards = ['AH', 'AD'];  
-    //$dealersCards[] = array_pop($cards);
-    //$dealersCards[] = array_pop($cards);
-    $dealersCards = ['AS', '2H'];  
-
-
+ shuffle($cards);
   
-
-
 while ($wantToPlay) {
 
+    //give the player cards
+    $playersCards[] = array_pop($cards);
+    $playersCards[] = array_pop($cards);
+
+    //give the dealer cards
+    $dealersCards[] = array_pop($cards);
+    $dealersCards[] = array_pop($cards);
+
+    // for testing  
+    //$playersCards = ['TC', '6C'];
+    //$playersCards = ['AH', 'AD'];  
+    // $dealersCards = ['AS', '2H'];  
+
+
     while($playerHandStatus){
-        // echo "Hit this ---- \n";
 
         $betAmount = 50;
 
@@ -52,8 +54,9 @@ while ($wantToPlay) {
         showHand($playersCards);
 
         $playerHandValue = calculateHandValue($playersCards);
-       // $dealerHandValue = calculateHandValue($dealersCards);
-       // echo $playerHandValue . "\n";
+
+        echo 'Your hand has a value of ';
+        echo $playerHandValue . "\n";
        
 
     
@@ -97,8 +100,8 @@ while ($wantToPlay) {
             echo "Your current bank account is now at " . $bankAccount . "\n";
 
             echo "Your cards were: ";
-            print_r($playersCards);
-
+            showHand($playersCards);
+            $playerBust = true;
     }
 
     if($playerHandValue == 21 && $dealerHandValue == 21){
@@ -117,7 +120,7 @@ while ($wantToPlay) {
         }
 
     elseif($playerHandValue == 21){
-            echo "You win with Blackjack!";
+            echo "You win with Blackjack! \n";
             $bankAccount += $betAmount;
             echo "Your current bank account is now at " . $bankAccount . "\n";
             $playerHandStatus = false;
@@ -154,11 +157,12 @@ while ($wantToPlay) {
         }
     }//end of while player status being true
 
+    
     echo 'The dealer\'s cards are: ';
     showHand($dealersCards);
     $dealerHandValue = calculateHandValue($dealersCards);
 
-    while($dealerHandStatus){
+    while($dealerHandStatus && $playerBust !== true){
 
         echo "The dealer's cards are: \n";
         showHand($dealersCards);
@@ -189,22 +193,38 @@ while ($wantToPlay) {
     } //end while dealer's status true
 
     //check who won
-    if($dealerHandValue == $playerHandValue){
-        echo 'Tie! No money changed hands';
+    if($dealerHandValue > 21){
+        echo 'You win because the dealer busted. ' . "\n";
+        $bankAccount += $betAmount;
+        echo "You now have ". $bankAccount . " in the bank\n";
     }
 
-    if($dealerHandValue > $playerHandValue){
+    elseif($playerHandValue > 21){
+        echo 'You lose because you busted' . "\n";
+        $bankAccount -= $betAmount;
+        echo "You now have ". $bankAccount . " in the bank\n";
+    }
+
+    elseif($dealerHandValue == $playerHandValue){
+        echo 'Tie! No money changed hands' . "\n";
+    }
+
+    elseif($dealerHandValue > $playerHandValue){
         echo 'Dealer wins' . "\n";
         $bankAccount -= $betAmount;
         echo "You now have ". $bankAccount . " in the bank\n";
 
     }
 
-    if($dealerHandValue < $playerHandValue){
+    elseif($dealerHandValue < $playerHandValue && $dealerHandStatus == false){
         echo 'You win!' . "\n";
         $bankAccount += $betAmount;
         echo "You now have ". $bankAccount . " in the bank\n";
 
+    }
+
+    else{
+        "How did we get here? --- Contact developer \n";
     }
 
 
