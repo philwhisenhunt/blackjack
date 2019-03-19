@@ -91,17 +91,18 @@ while ($wantToPlay) {
             }
             
     }
-
+/////////
     //if it is still over 21, then stop
     if($playerHandValue > 21){
             $playerHandStatus = false;
-            echo "You busted, you lose. \n";
-            $bankAccount -= $betAmount;
-            echo "Your current bank account is now at " . $bankAccount . "\n";
+            $dealerHandStatus = false;
+            // echo "You busted, you lose. \n";
+            // $bankAccount -= $betAmount;
+            // echo "Your current bank account is now at " . $bankAccount . "\n";
 
-            echo "Your cards were: ";
-            showHand($playersCards);
-            $playerBust = true;
+            // echo "Your cards were: ";
+            // showHand($playersCards);
+            // $playerBust = true;
     }
 
     if($playerHandValue == 21 && $dealerHandValue == 21){
@@ -112,14 +113,14 @@ while ($wantToPlay) {
         }
 
         elseif($dealerHandValue == 21){
-            echo "Dealer wins. ";
-            $bankAccount -= $betAmount;
-            echo "Your current bank account is now at " . $bankAccount . "\n";
+            // echo "Dealer wins. ";
+            // $bankAccount -= $betAmount;
+            // echo "Your current bank account is now at " . $bankAccount . "\n";
             $playerHandStatus = false;
             $dealerHandStatus = false;
         }
 
-    elseif($playerHandValue == 21){
+    elseif($playerHandValue == 21 && count($playersCards) < 3){
             echo "You win with Blackjack! \n";
             $bankAccount += $betAmount;
             echo "Your current bank account is now at " . $bankAccount . "\n";
@@ -198,7 +199,7 @@ while ($wantToPlay) {
         $bankAccount += $betAmount;
         echo "You now have ". $bankAccount . " in the bank\n";
     }
-
+/////////
     elseif($playerHandValue > 21){
         echo 'You lose because you busted' . "\n";
         $bankAccount -= $betAmount;
