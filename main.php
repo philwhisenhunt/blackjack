@@ -159,6 +159,9 @@ while ($wantToPlay) {
     $dealerHandValue = calculateHandValue($dealersCards);
 
     while($dealerHandStatus){
+
+        echo "The dealer's cards are: \n";
+        showHand($dealersCards);
         $dealerHandValue = calculateHandValue($dealersCards);
 
         echo 'Dealer has a value of ' . $dealerHandValue . "\n";
