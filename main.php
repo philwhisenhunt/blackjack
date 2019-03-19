@@ -179,12 +179,10 @@ while ($wantToPlay) {
     showHand($dealersCards);
     $dealerHandValue = calculateHandValue($dealersCards);
 
-    echo '-------$dealerHandValue is ' . $dealerHandValue . "\n";
-
     while($dealerHandStatus){
         $dealerHandValue = calculateHandValue($dealersCards);
 
-        echo '-------$dealerHandValue is ' . $dealerHandValue . "\n";
+        echo 'Dealer has a value of ' . $dealerHandValue . "\n";
 
         if($dealerHandValue > 21){
             echo 'Dealer busted' . "\n";
@@ -217,6 +215,13 @@ while ($wantToPlay) {
     if($dealerHandValue > $playerHandValue){
         echo 'Dealer wins' . "\n";
         $bankAccount -= $betAmount;
+        echo "You now have ". $bankAccount . " in the bank\n";
+
+    }
+
+    if($dealerHandValue < $playerHandValue){
+        echo 'You win!' . "\n";
+        $bankAccount += $betAmount;
         echo "You now have ". $bankAccount . " in the bank\n";
 
     }
