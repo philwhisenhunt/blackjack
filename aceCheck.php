@@ -13,7 +13,7 @@ function aceCheck($cardValueArray){
                     //echo '$cardValueArray value is ' . array_sum($cardValueArray) . "\n";
     
                     if(array_sum($cardValueArray) < 21 ){
-                        echo "Success! \n"; 
+                        //echo "Success! \n"; 
                         return array_sum($cardValueArray);
     
                     }
@@ -23,6 +23,6 @@ function aceCheck($cardValueArray){
            
             }
             
-        }
+        }//end of while statement
         return array_sum($cardValueArray); 
 }

@@ -53,8 +53,7 @@ while ($wantToPlay) {
         echo "Your cards are:\n";
         showHand($playersCards);
 
-        $playerHandValue = calculateHandValue($playersCards);
-
+       $playerHandValue = calculateHandValue($playersCards);
         echo 'Your hand has a value of ';
         echo $playerHandValue . "\n";
        
