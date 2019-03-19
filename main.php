@@ -60,15 +60,11 @@ while ($wantToPlay) {
 
         //check most complex thing first
 
+        //check for aces. If ace, then try the value minus 10. 
         if($playerHandValue > 21){
-            
-            //check for aces. If ace, then try the value minus 10. 
-
-            $cardValueArray = [];
+             $cardValueArray = [];
             //get the value or whatever the first card is (without the suit)
-            // echo "Print the cardValueArray before: ";
-            // print_r($cardValueArray);
-
+          
             //loop through and split up the cards and remove the suit, to render an array of their value
             for($i=0; $i<count($playersCards); $i++){
 
@@ -80,11 +76,7 @@ while ($wantToPlay) {
                 // print_r($cardValueArray);
 
             }   
-            //print_r($cardValueArray);
-           // echo "The sum of the values is: " . array_sum($cardValueArray) . "\n";
-
-
-            //print_r($cardValueArray);
+          
             //check if there are aces in card value array
             $playerHandValue = aceCheck($cardValueArray);
             echo "The value of your hand is: " . $playerHandValue . "\n";
@@ -94,13 +86,7 @@ while ($wantToPlay) {
             if($playerHandValue > 21){
                 $playerHandStatus = false;
             }
-            else{
-                //at this point, the hand value is still 11
-            }
             
-            // print_r($cardValueArray);
-            // echo 'This should say 12: ' . $playerHandValue . "\n";
-
     }
 
     //if it is still over 21, then stop
@@ -141,16 +127,13 @@ while ($wantToPlay) {
 
         elseif($playerHandValue < 21){
 
-            //move everything in here
-            //echo "!!!The value of your hand is $playerHandValue \n";
-            //echo "\n" . 'Reached else and the playerHandStatus is '. $playerHandStatus . "\n";
-
-            if($playerHandStatus){//while players turn
-                //while handstatus is true AND cards are less than 21
+            //while players turn
+            if($playerHandStatus){
+                
                 $line = readline("Type h to hit or s for stand \n");
             
                 if ($line === "h"){
-                    //give them a card
+                    
                     $playersCards[] = array_pop($cards);
                 }
 
@@ -170,10 +153,6 @@ while ($wantToPlay) {
 
         }
     }//end of while player status being true
-
-    //now add the dealer stuff
-    //use another while loop
-    //if less than 17 add a card
 
     echo 'The dealer\'s cards are: ';
     showHand($dealersCards);
@@ -207,7 +186,6 @@ while ($wantToPlay) {
     } //end while dealer's status true
 
     //check who won
-
     if($dealerHandValue == $playerHandValue){
         echo 'Tie! No money changed hands';
     }
@@ -227,10 +205,11 @@ while ($wantToPlay) {
     }
 
 
-
+    //reset to false so that the game won't run forever
     $wantToPlay = false;
-    $promptReplay = readline("Want to play again? (Y or N)\n");
-
+    $promptReplay = readline("Want to play again? (y or n)\n");
+    
+    //but give them a chance to keep playing
     if($promptReplay == "y" || $promptReplay == "Y"){
         $wantToPlay = true;
         $playersCards = [];
@@ -240,9 +219,9 @@ while ($wantToPlay) {
   
     }
 
+    //if not, then quit the program
     else{
         exit();   
-
     }
 
 
