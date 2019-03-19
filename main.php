@@ -46,7 +46,8 @@ while ($wantToPlay) {
     while($playerHandStatus){
         // echo "Hit this ---- \n";
 
-   
+        $betAmount = 50;
+
         echo "Your cards are:\n";
         showHand($playersCards);
 
@@ -205,7 +206,21 @@ while ($wantToPlay) {
             $dealersCards[] = array_pop($cards);
         }
 
+    } //end while dealer's status true
+
+    //check who won
+
+    if($dealerHandValue == $playerHandValue){
+        echo 'Tie! No money changed hands';
     }
+
+    if($dealerHandValue > $playerHandValue){
+        echo 'Dealer wins' . "\n";
+        $bankAccount -= $betAmount;
+        echo "You now have ". $bankAccount . " in the bank\n";
+
+    }
+
 
 
     $wantToPlay = false;
@@ -220,7 +235,11 @@ while ($wantToPlay) {
   
     }
 
-    exit();   
+    else{
+        exit();   
+
+    }
+
 
 }
 
