@@ -66,54 +66,12 @@ while ($wantToPlay) {
             $playerHandStatus = false;
         }
 
-        //check most complex thing first
 
-        //check for aces. If ace, then try the value minus 10. 
-        /* blocking this out during transfer
-        if($playerHandValue > 21){
-             $cardValueArray = [];
-            //get the value or whatever the first card is (without the suit)
-          
-            //loop through and split up the cards and remove the suit, to render an array of their value
-            for($i=0; $i<count($playersCards); $i++){
-
-                //take each card and turn it into an array (of two letters or numbers)
-                $splitHand = str_split($playersCards[$i]); //2H $playerHand[i][0]
-                
-                $cardValueArray[] = cardValueMaker($splitHand[0]);
-                // echo "Print the cardValueArray after: ";
-                // print_r($cardValueArray);
-
-            }   
-            //removing this and moving to calculateHandValue
-          
-            //check if there are aces in card value array
-            $playerHandValue = aceCheck($cardValueArray);
-            echo "The value of your hand is: " . $playerHandValue . "\n";
-
-            
-
-            // echo 'This should say 12: ' . $playerHandValue . "\n";
-            
-
-            if($playerHandValue > 21){
-                $playerHandStatus = false;
-            }
-            
-        }
-        */
-/////////
     //if it is still over 21, then stop
     if($playerHandValue > 21){
             $playerHandStatus = false;
             $dealerHandStatus = false;
-            // echo "You busted, you lose. \n";
-            // $bankAccount -= $betAmount;
-            // echo "Your current bank account is now at " . $bankAccount . "\n";
-
-            // echo "Your cards were: ";
-            // showHand($playersCards);
-            // $playerBust = true;
+           
     }
 
     if($playerHandValue == 21 && $dealerHandValue == 21){

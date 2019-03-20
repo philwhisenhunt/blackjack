@@ -1,7 +1,5 @@
 <?php
 
-//require 'cardValueMaker.php';
-
 function calculateHandValue($playerHand){ //[2H, 9S]
 
     $cardValueArray= [];
@@ -21,7 +19,7 @@ function calculateHandValue($playerHand){ //[2H, 9S]
     $playerHandValue = array_sum($cardValueArray);
     
 
-    //insert here
+  
     if($playerHandValue > 21){
         $playerHandValue = aceCheck($cardValueArray);
   
