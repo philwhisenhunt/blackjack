@@ -42,8 +42,8 @@ while ($wantToPlay) {
 
     // for testing  
     //$playersCards = ['TC', '6C'];
-    //$playersCards = ['AH', 'AD'];  
-    // $dealersCards = ['AS', '2H'];  
+    // $playersCards = ['AH', 'AD'];  
+    //  $dealersCards = ['AS', '2H'];  
 
 
     while($playerHandStatus){
@@ -58,11 +58,14 @@ while ($wantToPlay) {
         echo $playerHandValue . "\n";
        
 
-    
+        if($playerHandValue > 21){
+            $playerHandStatus = false;
+        }
 
         //check most complex thing first
 
         //check for aces. If ace, then try the value minus 10. 
+        /* blocking this out during transfer
         if($playerHandValue > 21){
              $cardValueArray = [];
             //get the value or whatever the first card is (without the suit)
@@ -78,10 +81,14 @@ while ($wantToPlay) {
                 // print_r($cardValueArray);
 
             }   
+            //removing this and moving to calculateHandValue
           
             //check if there are aces in card value array
             $playerHandValue = aceCheck($cardValueArray);
             echo "The value of your hand is: " . $playerHandValue . "\n";
+
+            
+
             // echo 'This should say 12: ' . $playerHandValue . "\n";
             
 
@@ -89,7 +96,8 @@ while ($wantToPlay) {
                 $playerHandStatus = false;
             }
             
-    }
+        }
+        */
 /////////
     //if it is still over 21, then stop
     if($playerHandValue > 21){

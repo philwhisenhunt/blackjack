@@ -15,19 +15,18 @@ function calculateHandValue($playerHand){ //[2H, 9S]
 
         //get the value or whatever the first card is (without the suit)
         $cardValueArray[] = cardValueMaker($splitHand[0]);
-        //[2,9]
-        //echo "The cardValueArray is ";
         //print_r($cardValueArray);
-        
-
-        //echo "The cardValueArray is ";
-        //print_r($cardValueArray);
+      
     }
+    $playerHandValue = array_sum($cardValueArray);
+    
 
-    //perhaps add aceChecker here?
-   // aceCheck($cardValueArray);
-   //didn't work
-   //might be the double splitting.. Look into that tomorrow
-    return array_sum($cardValueArray);
+    //insert here
+    if($playerHandValue > 21){
+        $playerHandValue = aceCheck($cardValueArray);
+  
+   }
+ 
+    return $playerHandValue;
 
 }
