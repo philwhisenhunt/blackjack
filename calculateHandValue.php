@@ -25,6 +25,8 @@ function calculateHandValue($playerHand){ //[2H, 9S]
     }
 
     //perhaps add aceChecker here?
+   // aceCheck($cardValueArray);
+   //didn't work
     return array_sum($cardValueArray);
 
 }
