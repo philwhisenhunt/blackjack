@@ -56,6 +56,10 @@ while ($wantToPlay) {
        $playerHandValue = calculateHandValue($playersCards);
         echo 'Your hand has a value of ';
         echo $playerHandValue . "\n";
+
+        echo 'The dealer is showing these cards ' . "\n";
+        showDealerHalfHand($dealersCards);
+       // echo "\n";
        
 
         if($playerHandValue > 21){
@@ -252,6 +256,7 @@ while ($wantToPlay) {
 
     //if not, then quit the program
     else{
+        echo "\n \nThanks for playing. \n \n";
         exit();   
     }
 

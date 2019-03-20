@@ -23,6 +23,6 @@ function aceCheck($cardValueArray){
             }
             
         }//end of while statement
-        echo "------------ \n";
+        
         return array_sum($cardValueArray); 
 }
